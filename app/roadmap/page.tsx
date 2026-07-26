@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import AuthGuard from "@/components/AuthGuard";
-import BottomNav from "@/components/BottomNav";
 import { supabaseBrowser } from "@/lib/supabase";
 import type { RoadmapMilestone } from "@/lib/types";
 
@@ -86,7 +85,7 @@ function RoadmapChat() {
   }
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-md flex-col px-4 pb-24 pt-6">
+    <main className="mx-auto flex min-h-screen max-w-2xl flex-col px-4 py-6">
       <h1 className="font-display text-2xl font-bold">Roadmap</h1>
 
       <input
@@ -151,7 +150,7 @@ function RoadmapChat() {
         )}
       </div>
 
-      <div className="fixed inset-x-0 bottom-14 mx-auto flex w-full max-w-md gap-2 bg-bg px-4 py-2">
+      <div className="mt-6 flex gap-2 bg-bg px-4 py-2">
         <input
           value={topicInput}
           onChange={(e) => setTopicInput(e.target.value)}
@@ -167,8 +166,6 @@ function RoadmapChat() {
           Send
         </button>
       </div>
-
-      <BottomNav />
     </main>
   );
 }

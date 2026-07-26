@@ -129,3 +129,95 @@ export async function generateStudyPack(topic: string, sourceText: string) {
     responseSchema: STUDY_PACK_SCHEMA,
   });
 }
+
+// --- Extended generation modes for course workspace -----------------------
+
+const GUIDED_NOTES_SCHEMA = {
+  type: "object",
+  properties: {
+    summary: { type: "string" },
+    keyPoints: { type: "array", items: { type: "string" } },
+    deeperExplanation: { type: "string" },
+  },
+  required: ["summary", "keyPoints", "deeperExplanation"],
+};
+
+export async function generateGuidedNotes(topic: string, sourceText: string) {
+  return callGemmaJSON<{
+    summary: string;
+    keyPoints: string[];
+    deeperExplanation: string;
+  }>({
+    systemInstruction:
+      "You are a tutor creating structured guided notes. Provide a clear summary, " +
+      "bullet-pointed key concepts, and a deeper explanation that builds intuition.",
+    prompt: `Topic: ${topic}\nSource material:\n${sourceText}\n\nCreate comprehensive guided notes.`,
+    responseSchema: GUIDED_NOTES_SCHEMA,
+  });
+}
+
+const PRACTICE_QUESTIONS_SCHEMA = {
+  type: "object",
+  properties: {
+    questions: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          prompt: { type: "string" },
+          guidance: { type: "string" },
+        },
+        required: ["prompt", "guidance"],
+      },
+    },
+  },
+  required: ["questions"],
+};
+
+export async function generatePracticeQuestions(topic: string, sourceText: string) {
+  return callGemmaJSON<{
+    questions: Array<{ prompt: string; guidance: string }>;
+  }>({
+    systemInstruction:
+      "You create open-ended practice questions that require students to apply knowledge. " +
+      "Each question includes guidance on how to approach it.",
+    prompt: `Topic: ${topic}\nSource material:\n${sourceText}\n\nGenerate 3-5 practice questions.`,
+    responseSchema: PRACTICE_QUESTIONS_SCHEMA,
+  });
+}
+
+const VIDEO_SCRIPT_SCHEMA = {
+  type: "object",
+  properties: {
+    title: { type: "string" },
+    duration: { type: "number" },
+    outline: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          section: { type: "string" },
+          duration: { type: "number" },
+          content: { type: "string" },
+        },
+        required: ["section", "duration", "content"],
+      },
+    },
+  },
+  required: ["title", "duration", "outline"],
+};
+
+export async function generateVideoScript(topic: string, sourceText: string) {
+  return callGemmaJSON<{
+    title: string;
+    duration: number;
+    outline: Array<{ section: string; duration: number; content: string }>;
+  }>({
+    systemInstruction:
+      "You create lesson scripts and outlines for educational videos. Structure them into " +
+      "clear sections with estimated durations and detailed content points. " +
+      "Total video should be 5-10 minutes.",
+    prompt: `Topic: ${topic}\nSource material:\n${sourceText}\n\nCreate a video lesson outline. Total duration: 5-10 minutes.`,
+    responseSchema: VIDEO_SCRIPT_SCHEMA,
+  });
+}

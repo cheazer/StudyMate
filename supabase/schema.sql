@@ -1,4 +1,4 @@
--- Run this in the Supabase SQL editor (or via `supabase db push`).
+-- Run this in the Supabase SQL editor (or via supabase db push).
 -- Matches the contract in lib/types.ts — keep them in sync.
 
 create table if not exists profiles (
@@ -60,7 +60,7 @@ alter table attempts enable row level security;
 alter table streak_log enable row level security;
 
 -- TODO once auth is wired up: replace the permissive demo policies below with
--- `using (auth.uid() = user_id)` / `with check (auth.uid() = user_id)` on each
+-- using (auth.uid() = user_id) / with check (auth.uid() = user_id) on each
 -- table. Left open here so the hackathon build isn't blocked on auth first.
 create policy "demo_allow_all_profiles" on profiles for all using (true) with check (true);
 create policy "demo_allow_all_topics" on topics for all using (true) with check (true);
