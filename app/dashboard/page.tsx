@@ -1,8 +1,13 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import StreakStrip from "@/components/StreakStrip";
 import WeekHoursChart from "@/components/WeekHoursChart";
 import NudgeBanner from "@/components/NudgeBanner";
 import TopicCard from "@/components/TopicCard";
 import BottomNav from "@/components/BottomNav";
+import AuthGuard from "@/components/AuthGuard";
+import { supabaseBrowser } from "@/lib/supabase";
 import type { DashboardSummary } from "@/lib/types";
 
 // TODO: replace with a real fetch from Supabase (profiles + topics + streak_log
@@ -55,15 +60,28 @@ function todayLabel() {
   return new Date().toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" });
 }
 
-export default function DashboardPage() {
+function DashboardContent() {
+  const router = useRouter();
   const d = MOCK;
   const totalHours = d.weekHoursByDay.reduce((sum, x) => sum + x.hours, 0);
   const activeDaysThisWeek = d.weekHoursByDay.map((x) => x.hours > 0);
 
+  async function signOut() {
+    await supabaseBrowser().auth.signOut();
+    router.replace("/login");
+  }
+
   return (
     <main className="mx-auto max-w-md px-4 pb-24 pt-8">
-      <p className="text-sm text-ink-muted">{todayLabel()}</p>
-      <h1 className="font-display text-2xl font-bold">Good morning.</h1>
+      <div className="flex items-start justify-between">
+        <div>
+          <p className="text-sm text-ink-muted">{todayLabel()}</p>
+          <h1 className="font-display text-2xl font-bold">Good morning.</h1>
+        </div>
+        <button onClick={signOut} className="text-xs text-ink-muted hover:text-forest">
+          Sign out
+        </button>
+      </div>
 
       <div className="mt-5 grid grid-cols-1 gap-4">
         <StreakStrip streakDays={d.currentStreakDays} activeDaysThisWeek={activeDaysThisWeek} />
@@ -97,5 +115,13 @@ export default function DashboardPage() {
 
       <BottomNav />
     </main>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <AuthGuard>
+      <DashboardContent />
+    </AuthGuard>
   );
 }
