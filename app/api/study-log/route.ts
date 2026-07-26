@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { supabaseServer } from "@/lib/supabase";
+import { DEMO_USER_ID } from "@/lib/constants";
 
 const StudyLogInput = z.object({
   courseName: z.string().min(1),
@@ -20,7 +21,7 @@ export async function POST(req: Request) {
 
   // For now, use a fixed user ID. In production, this would come from auth.
   // The app can be updated once Supabase auth is fully wired.
-  const userId = "demo-user";
+  const userId = DEMO_USER_ID;
   const date = studiedAt
     ? new Date(studiedAt).toISOString().split("T")[0]
     : new Date().toISOString().split("T")[0];
@@ -67,7 +68,7 @@ export async function GET(req: Request) {
     );
   }
 
-  const userId = "demo-user";
+  const userId = DEMO_USER_ID;
   const today = new Date();
   const todayStr = today.toISOString().split("T")[0];
 

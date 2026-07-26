@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { supabaseServer } from "@/lib/supabase";
+import { DEMO_USER_ID } from "@/lib/constants";
 
 const StudyHoursInput = z.object({
   courseId: z.string(),
@@ -21,7 +22,7 @@ export async function POST(req: Request) {
 
   try {
     // TODO: Replace with authenticated user's ID once Supabase auth is wired up
-    const userId = "demo-user";
+    const userId = DEMO_USER_ID;
 
     // Insert or update streak log
     const { error } = await supabaseServer()
@@ -55,7 +56,7 @@ export async function POST(req: Request) {
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const userId = searchParams.get("userId") || "demo-user";
+    const userId = searchParams.get("userId") || DEMO_USER_ID;
 
     const today = new Date();
     const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);

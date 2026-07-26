@@ -3,3 +3,7 @@ node_modules/
 .env.local
 .env*.local
 .next/
+
+# Rendered Manim videos (app/api/topics/[topicId]/video) — generated at
+# runtime, not source.
+public/generated-videos/*.mp4

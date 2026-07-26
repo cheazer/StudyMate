@@ -15,6 +15,7 @@ export interface Profile {
 
 export interface Topic {
   id: string;
+  courseId?: string;
   courseName: string;
   title: string;
   category: StudyCategory;
@@ -114,4 +115,44 @@ export interface CourseSummary {
   recentStudyPacks: StudyPack[];
   recentAttempts: Attempt[];
   todayStudyMinutes: number;
+}
+
+// A course is a folder a student creates and uploads PDF material into.
+// Gemma analyzes the combined material into suggested subtopics + a roadmap.
+export interface CourseSubtopicSuggestion {
+  title: string;
+  summary: string;
+}
+
+export interface Course {
+  id: string;
+  name: string;
+  topicCount: number;
+  createdAt: string;
+  analyzedAt: string | null;
+}
+
+export interface CourseDetail {
+  id: string;
+  name: string;
+  materialCount: number;
+  analyzedAt: string | null;
+  suggestedSubtopics: CourseSubtopicSuggestion[];
+  roadmap: RoadmapMilestone[];
+  topics: Topic[];
+  todayStudyMinutes: number;
+}
+
+export interface TopicDetail {
+  id: string;
+  courseId: string;
+  courseName: string;
+  title: string;
+  sourceText: string;
+  note: string;
+}
+
+export interface ChatMessage {
+  role: "user" | "assistant";
+  text: string;
 }

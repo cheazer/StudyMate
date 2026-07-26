@@ -3,6 +3,7 @@
     "@google/genai": "^2.13.0",
     "@supabase/supabase-js": "^2.45.0",
     "next": "^16.2.12",
+    "pdf-parse": "^2.4.5",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "zod": "^3.23.8"

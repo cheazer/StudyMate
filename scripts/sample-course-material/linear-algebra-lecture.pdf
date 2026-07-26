@@ -1,0 +1,204 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R 5 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 3 0 R >> >> /MediaBox [0 0 612 792] /Contents 6 0 R >>
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /Resources << /Font << /F1 3 0 R >> >> /MediaBox [0 0 612 792] /Contents 7 0 R >>
+endobj
+6 0 obj
+<< /Length 3749 >>
+stream
+BT
+/F1 11 Tf
+12 TL
+50 740 Td
+/F1 13 Tf
+(Lecture 1: Vector Spaces and Subspaces) Tj
+T*
+/F1 11 Tf
+() Tj
+T*
+/F1 11 Tf
+(A vector space is a set V, together with two operations \(vector addition and scalar) Tj
+T*
+/F1 11 Tf
+(multiplication\), satisfying eight axioms: closure under addition, associativity of addition,) Tj
+T*
+/F1 11 Tf
+(commutativity of addition, existence of a zero vector, existence of additive inverses,) Tj
+T*
+/F1 11 Tf
+(closure under scalar multiplication, distributivity of scalar multiplication over vector) Tj
+T*
+/F1 11 Tf
+(addition, and distributivity of scalar multiplication over field addition.) Tj
+T*
+/F1 11 Tf
+() Tj
+T*
+/F1 11 Tf
+(Common examples include R^n \(n-tuples of real numbers\), the space of polynomials of degree) Tj
+T*
+/F1 11 Tf
+(at most n, and spaces of continuous functions on an interval. A subspace is a subset of a) Tj
+T*
+/F1 11 Tf
+(vector space that is itself a vector space under the inherited operations; to check whether) Tj
+T*
+/F1 11 Tf
+(a subset W of V is a subspace, it suffices to verify that W contains the zero vector and is) Tj
+T*
+/F1 11 Tf
+(closed under both addition and scalar multiplication.) Tj
+T*
+/F1 11 Tf
+() Tj
+T*
+/F1 13 Tf
+(Lecture 2: Linear Independence, Basis, and Dimension) Tj
+T*
+/F1 11 Tf
+() Tj
+T*
+/F1 11 Tf
+(A set of vectors {v1, ..., vk} is linearly independent if the only solution to c1*v1 + c2*v2) Tj
+T*
+/F1 11 Tf
+(+ ... + ck*vk = 0 is c1 = c2 = ... = ck = 0. If a nontrivial combination equals zero, the) Tj
+T*
+/F1 11 Tf
+(set is linearly dependent, meaning at least one vector can be written as a combination of) Tj
+T*
+/F1 11 Tf
+(the others.) Tj
+T*
+/F1 11 Tf
+() Tj
+T*
+/F1 11 Tf
+(A basis for a vector space V is a linearly independent set that spans V  every vector in V) Tj
+T*
+/F1 11 Tf
+(can be written uniquely as a linear combination of basis vectors. All bases of a given) Tj
+T*
+/F1 11 Tf
+(finite-dimensional vector space have the same number of elements, called the dimension of V,) Tj
+T*
+/F1 11 Tf
+(written dim\(V\).) Tj
+T*
+/F1 11 Tf
+() Tj
+T*
+/F1 13 Tf
+(Lecture 3: Matrices and Linear Transformations) Tj
+T*
+/F1 11 Tf
+() Tj
+T*
+/F1 11 Tf
+(A linear transformation T: V -> W between vector spaces preserves vector addition and scalar) Tj
+T*
+/F1 11 Tf
+(multiplication: T\(u + v\) = T\(u\) + T\(v\) and T\(c*v\) = c*T\(v\). Every linear transformation) Tj
+T*
+/F1 11 Tf
+(between finite-dimensional vector spaces can be represented by a matrix once bases for V and) Tj
+T*
+/F1 11 Tf
+(W are fixed.) Tj
+T*
+/F1 11 Tf
+() Tj
+T*
+/F1 11 Tf
+(Composing two linear transformations corresponds exactly to multiplying their matrix) Tj
+T*
+/F1 11 Tf
+(representations. The rank of a matrix is the dimension of its column space \(equivalently,) Tj
+T*
+/F1 11 Tf
+(the dimension of the image of the transformation\), and the rank-nullity theorem relates) Tj
+T*
+/F1 11 Tf
+(rank, nullity, and the dimension of the domain: dim\(domain\) = rank\(T\) + nullity\(T\).) Tj
+T*
+/F1 11 Tf
+() Tj
+T*
+/F1 13 Tf
+(Lecture 4: Eigenvalues, Eigenvectors, and Diagonalization) Tj
+T*
+/F1 11 Tf
+() Tj
+T*
+/F1 11 Tf
+(For a square matrix A, a nonzero vector v is an eigenvector of A if Av = lambda*v for some) Tj
+T*
+/F1 11 Tf
+(scalar lambda, called the corresponding eigenvalue. Eigenvalues are found as the roots of) Tj
+T*
+/F1 11 Tf
+(the characteristic polynomial, det\(A - lambda*I\) = 0, and the eigenvectors for a given) Tj
+T*
+/F1 11 Tf
+(eigenvalue span its eigenspace.) Tj
+T*
+/F1 11 Tf
+() Tj
+T*
+/F1 11 Tf
+(A matrix A is diagonalizable if it can be written as A = P*D*P^-1, where D is diagonal and) Tj
+T*
+/F1 11 Tf
+(P's columns are linearly independent eigenvectors of A. Diagonalization is possible exactly) Tj
+T*
+/F1 11 Tf
+(when the algebraic and geometric multiplicities of every eigenvalue match, and it) Tj
+T*
+ET
+endstream
+endobj
+7 0 obj
+<< /Length 245 >>
+stream
+BT
+/F1 11 Tf
+12 TL
+50 740 Td
+/F1 11 Tf
+(dramatically simplifies computing powers of A \(A^k = P*D^k*P^-1\), which underlies methods) Tj
+T*
+/F1 11 Tf
+(like Principal Component Analysis and the power iteration method.) Tj
+T*
+/F1 11 Tf
+() Tj
+T*
+ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000191 00000 n 
+0000000317 00000 n 
+0000000443 00000 n 
+0000004243 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+4538
+%%EOF
