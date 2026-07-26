@@ -4,8 +4,6 @@ import { useRouter } from "next/navigation";
 import StreakStrip from "@/components/StreakStrip";
 import WeekHoursChart from "@/components/WeekHoursChart";
 import NudgeBanner from "@/components/NudgeBanner";
-import TopicCard from "@/components/TopicCard";
-import BottomNav from "@/components/BottomNav";
 import AuthGuard from "@/components/AuthGuard";
 import { supabaseBrowser } from "@/lib/supabase";
 import type { DashboardSummary } from "@/lib/types";
@@ -60,60 +58,112 @@ function todayLabel() {
   return new Date().toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" });
 }
 
+// Colorful course card colors (Google Classroom inspired)
+const courseColors = [
+  { bg: "bg-blue-light", border: "border-blue", accent: "bg-blue" },
+  { bg: "bg-violet-light", border: "border-violet", accent: "bg-violet" },
+  { bg: "bg-amber-light", border: "border-amber", accent: "bg-amber" },
+  { bg: "bg-forest-light", border: "border-forest", accent: "bg-forest" },
+];
+
 function DashboardContent() {
   const router = useRouter();
   const d = MOCK;
   const totalHours = d.weekHoursByDay.reduce((sum, x) => sum + x.hours, 0);
   const activeDaysThisWeek = d.weekHoursByDay.map((x) => x.hours > 0);
 
-  async function signOut() {
-    await supabaseBrowser().auth.signOut();
-    router.replace("/login");
-  }
-
   return (
-    <main className="mx-auto max-w-md px-4 pb-24 pt-8">
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-sm text-ink-muted">{todayLabel()}</p>
-          <h1 className="font-display text-2xl font-bold">Good morning.</h1>
-        </div>
-        <button onClick={signOut} className="text-xs text-ink-muted hover:text-forest">
-          Sign out
-        </button>
+    <main className="min-h-screen bg-bg py-8">
+      {/* Welcome Header */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8">
+        <p className="text-sm font-medium text-ink-muted">{todayLabel()}</p>
+        <h1 className="font-display text-4xl font-bold text-ink mt-1">Good morning.</h1>
       </div>
 
-      <div className="mt-5 grid grid-cols-1 gap-4">
-        <StreakStrip streakDays={d.currentStreakDays} activeDaysThisWeek={activeDaysThisWeek} />
-        <WeekHoursChart hoursByDay={d.weekHoursByDay} totalHours={totalHours} />
+      {/* Stats & Nudge Section */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-12">
+        {d.nudge && (
+          <div className="mb-6">
+            <NudgeBanner topicTitle={d.nudge.topicTitle} message={d.nudge.message} />
+          </div>
+        )}
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <StreakStrip streakDays={d.currentStreakDays} activeDaysThisWeek={activeDaysThisWeek} />
+          <WeekHoursChart hoursByDay={d.weekHoursByDay} totalHours={totalHours} />
+        </div>
       </div>
 
-      {d.nudge && (
-        <div className="mt-4">
-          <NudgeBanner topicTitle={d.nudge.topicTitle} message={d.nudge.message} />
+      {/* Courses/Topics Section - Google Classroom Style */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-8">
+          <h2 className="font-display text-2xl font-bold text-ink">Your courses</h2>
+          <p className="text-sm text-ink-muted mt-1">Continue where you left off</p>
         </div>
-      )}
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {d.activeTopics.map((topic, idx) => {
+            const colors = courseColors[idx % courseColors.length];
+            const progressWidth = (topic.progressPercent / 100) * 100;
+            
+            return (
+              <div
+                key={topic.id}
+                className={`${colors.bg} rounded-card overflow-hidden shadow-md hover:shadow-lg transition-shadow cursor-pointer border-l-4 ${colors.border}`}
+              >
+                {/* Header with accent color */}
+                <div className={`${colors.accent} h-20 relative overflow-hidden`}>
+                  <div className="absolute inset-0 opacity-20">
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-surface rounded-full -mr-10 -mt-10"></div>
+                    <div className="absolute bottom-0 left-0 w-16 h-16 bg-surface rounded-full -ml-8 -mb-8"></div>
+                  </div>
+                </div>
+                
+                {/* Content */}
+                <div className="p-5">
+                  <h3 className="font-display font-bold text-lg text-ink">{topic.title}</h3>
+                  <p className="text-sm text-ink-muted mt-1">{topic.courseName}</p>
+                  
+                  {/* Progress Bar */}
+                  <div className="mt-4 bg-white rounded-full h-2 overflow-hidden">
+                    <div
+                      className={`${colors.accent} h-full transition-all duration-300`}
+                      style={{ width: `${progressWidth}%` }}
+                    ></div>
+                  </div>
+                  
+                  {/* Stats */}
+                  <div className="flex items-center justify-between mt-3">
+                    <span className="text-xs font-medium text-ink-muted">{topic.progressPercent}% complete</span>
+                    <span className="text-xs text-ink-muted">Last touched: {topic.lastTouched}</span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
 
-      <div className="mt-6">
-        <div className="flex items-center justify-between">
-          <h2 className="font-medium">Active topics</h2>
-          <span className="text-sm text-forest">View all</span>
-        </div>
-        <div className="mt-3 flex flex-col gap-3">
-          {d.activeTopics.map((t) => (
-            <TopicCard
-              key={t.id}
-              courseName={t.courseName}
-              title={t.title}
-              category={t.category}
-              progressPercent={t.progressPercent}
-              lastTouchedLabel={t.lastTouched}
-            />
+      {/* Quick Actions */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { icon: "📚", label: "View All Courses", href: "/courses" },
+            { icon: "🗺️", label: "Roadmap", href: "/roadmap" },
+            { icon: "✏️", label: "Study Now", href: "/study" },
+            { icon: "🎯", label: "Continue Last", href: "#" },
+          ].map((action, idx) => (
+            <a
+              key={idx}
+              href={action.href}
+              className="flex flex-col items-center justify-center p-4 bg-surface rounded-card border border-border hover:border-forest hover:shadow-md transition-all text-center"
+            >
+              <span className="text-2xl mb-2">{action.icon}</span>
+              <span className="text-xs font-medium text-ink">{action.label}</span>
+            </a>
           ))}
         </div>
       </div>
-
-      <BottomNav />
     </main>
   );
 }

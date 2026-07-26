@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import TopNav from "@/components/TopNav";
 
 // Display face: carries the personality (streak numbers, headings).
 const display = Space_Grotesk({
@@ -36,6 +37,7 @@ export default function RootLayout({
       <body
         className={`${display.variable} ${body.variable} ${mono.variable} font-body bg-bg text-ink antialiased`}
       >
+        <TopNav />
         {children}
       </body>
     </html>

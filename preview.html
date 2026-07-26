@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyMate - Dashboard Preview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+        body {
+            font-family: var(--font-body);
+        }
+        .font-display {
+            font-family: var(--font-display);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- TOP NAV -->
+    <nav class="sticky top-0 z-40 border-b border-gray-200 bg-white shadow-sm">
+        <div class="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-8">
+                    <a href="#" class="flex items-center gap-2">
+                        <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-green-600">
+                            <span class="font-display text-xl font-bold text-white">S</span>
+                        </div>
+                        <span class="font-display text-lg font-bold text-gray-900 hidden sm:inline">StudyMate</span>
+                    </a>
+                    
+                    <div class="hidden md:flex gap-6">
+                        <a href="#" class="text-sm font-medium text-gray-900 hover:text-green-600 transition-colors">Dashboard</a>
+                        <a href="#" class="text-sm font-medium text-gray-900 hover:text-green-600 transition-colors">Courses</a>
+                        <a href="#" class="text-sm font-medium text-gray-900 hover:text-green-600 transition-colors">Study</a>
+                        <a href="#" class="text-sm font-medium text-gray-900 hover:text-green-600 transition-colors">Roadmap</a>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <button class="text-sm font-medium text-gray-600 hover:text-green-600 transition-colors">Sign out</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="min-h-screen bg-gray-100 py-8">
+        <!-- Welcome Header -->
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-8">
+            <p class="text-sm font-medium text-gray-600">Saturday, Jul 26</p>
+            <h1 class="font-display text-4xl font-bold text-gray-900 mt-1">Good morning.</h1>
+        </div>
+
+        <!-- Stats & Nudge Section -->
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mb-12">
+            <!-- Nudge Banner -->
+            <div class="mb-6 rounded-2xl border-l-4 border-amber-600 bg-amber-50 p-4">
+                <p class="font-display font-bold text-amber-900">Eigenvalues & Eigenvectors</p>
+                <p class="text-sm text-amber-800 mt-1">hasn't been touched in 3 days. A focused 25-minute session today will lock in your progress.</p>
+            </div>
+            
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Streak Card -->
+                <div class="rounded-2xl bg-white p-6 shadow-md">
+                    <p class="text-sm font-medium text-gray-600">Current Streak</p>
+                    <p class="font-display text-4xl font-bold text-green-600 mt-2">7 days 🔥</p>
+                    <div class="mt-4 flex gap-2">
+                        <span class="h-3 w-3 rounded-full bg-green-600"></span>
+                        <span class="h-3 w-3 rounded-full bg-green-600"></span>
+                        <span class="h-3 w-3 rounded-full bg-green-600"></span>
+                        <span class="h-3 w-3 rounded-full bg-gray-300"></span>
+                        <span class="h-3 w-3 rounded-full bg-green-600"></span>
+                        <span class="h-3 w-3 rounded-full bg-green-600"></span>
+                        <span class="h-3 w-3 rounded-full bg-green-600"></span>
+                    </div>
+                </div>
+
+                <!-- Chart Card -->
+                <div class="rounded-2xl bg-white p-6 shadow-md">
+                    <p class="text-sm font-medium text-gray-600">This Week: 13.5 hours</p>
+                    <div class="mt-4 flex items-end justify-between gap-2">
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-6 bg-green-400" style="height: 24px;"></div>
+                            <p class="text-xs text-gray-600">Mon</p>
+                        </div>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-6 bg-green-400" style="height: 16px;"></div>
+                            <p class="text-xs text-gray-600">Tue</p>
+                        </div>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-6 bg-green-400" style="height: 32px;"></div>
+                            <p class="text-xs text-gray-600">Wed</p>
+                        </div>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-6 bg-gray-300" style="height: 8px;"></div>
+                            <p class="text-xs text-gray-600">Thu</p>
+                        </div>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-6 bg-green-400" style="height: 24px;"></div>
+                            <p class="text-xs text-gray-600">Fri</p>
+                        </div>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-6 bg-green-400" style="height: 48px;"></div>
+                            <p class="text-xs text-gray-600">Sat</p>
+                        </div>
+                        <div class="flex flex-col items-center gap-1">
+                            <div class="w-6 bg-green-400" style="height: 80px;"></div>
+                            <p class="text-xs text-gray-600">Sun</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Courses Section - Google Classroom Style -->
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mb-8">
+                <h2 class="font-display text-2xl font-bold text-gray-900">Your courses</h2>
+                <p class="text-sm text-gray-600 mt-1">Continue where you left off</p>
+            </div>
+            
+            <!-- Course Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1: Blue -->
+                <div class="rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow cursor-pointer border-l-4 border-blue-500 bg-blue-50">
+                    <div class="bg-blue-500 h-20 relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-20">
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-white rounded-full -mr-10 -mt-10"></div>
+                            <div class="absolute bottom-0 left-0 w-16 h-16 bg-white rounded-full -ml-8 -mb-8"></div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display font-bold text-lg text-gray-900">Eigenvalues & Eigenvectors</h3>
+                        <p class="text-sm text-gray-600 mt-1">Linear Algebra</p>
+                        
+                        <div class="mt-4 bg-white rounded-full h-2 overflow-hidden">
+                            <div class="bg-blue-500 h-full transition-all duration-300" style="width: 45%;"></div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between mt-3">
+                            <span class="text-xs font-medium text-gray-600">45% complete</span>
+                            <span class="text-xs text-gray-600">Last touched: Yesterday</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Purple -->
+                <div class="rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow cursor-pointer border-l-4 border-purple-500 bg-purple-50">
+                    <div class="bg-purple-500 h-20 relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-20">
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-white rounded-full -mr-10 -mt-10"></div>
+                            <div class="absolute bottom-0 left-0 w-16 h-16 bg-white rounded-full -ml-8 -mb-8"></div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display font-bold text-lg text-gray-900">Neural Networks</h3>
+                        <p class="text-sm text-gray-600 mt-1">Machine Learning</p>
+                        
+                        <div class="mt-4 bg-white rounded-full h-2 overflow-hidden">
+                            <div class="bg-purple-500 h-full transition-all duration-300" style="width: 62%;"></div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between mt-3">
+                            <span class="text-xs font-medium text-gray-600">62% complete</span>
+                            <span class="text-xs text-gray-600">Last touched: 2 days ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Amber -->
+                <div class="rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-shadow cursor-pointer border-l-4 border-amber-600 bg-amber-50">
+                    <div class="bg-amber-600 h-20 relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-20">
+                            <div class="absolute top-0 right-0 w-20 h-20 bg-white rounded-full -mr-10 -mt-10"></div>
+                            <div class="absolute bottom-0 left-0 w-16 h-16 bg-white rounded-full -ml-8 -mb-8"></div>
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-display font-bold text-lg text-gray-900">Probability Distributions</h3>
+                        <p class="text-sm text-gray-600 mt-1">Statistics</p>
+                        
+                        <div class="mt-4 bg-white rounded-full h-2 overflow-hidden">
+                            <div class="bg-amber-600 h-full transition-all duration-300" style="width: 78%;"></div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between mt-3">
+                            <span class="text-xs font-medium text-gray-600">78% complete</span>
+                            <span class="text-xs text-gray-600">Last touched: Today</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-12 pb-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="#" class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl border border-gray-200 hover:border-green-600 hover:shadow-md transition-all text-center">
+                    <span class="text-2xl mb-2">📚</span>
+                    <span class="text-xs font-medium text-gray-900">View All Courses</span>
+                </a>
+                <a href="#" class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl border border-gray-200 hover:border-green-600 hover:shadow-md transition-all text-center">
+                    <span class="text-2xl mb-2">🗺️</span>
+                    <span class="text-xs font-medium text-gray-900">Roadmap</span>
+                </a>
+                <a href="#" class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl border border-gray-200 hover:border-green-600 hover:shadow-md transition-all text-center">
+                    <span class="text-2xl mb-2">✏️</span>
+                    <span class="text-xs font-medium text-gray-900">Study Now</span>
+                </a>
+                <a href="#" class="flex flex-col items-center justify-center p-4 bg-white rounded-2xl border border-gray-200 hover:border-green-600 hover:shadow-md transition-all text-center">
+                    <span class="text-2xl mb-2">🎯</span>
+                    <span class="text-xs font-medium text-gray-900">Continue Last</span>
+                </a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
