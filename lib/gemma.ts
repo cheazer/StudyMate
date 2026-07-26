@@ -18,6 +18,46 @@ interface CallGemmaJSONOptions {
   responseSchema: object; // JSON schema describing the expected output shape
 }
 
+/**
+ * JSON mode is a strong hint, but models can still append a second JSON value
+ * or wrap the response in a Markdown fence. Parse the first complete JSON
+ * value rather than letting that extra text take down the request.
+ */
+function parseGemmaJSON<T>(text: string): T {
+  const cleaned = text.trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/, "");
+
+  try {
+    return JSON.parse(cleaned) as T;
+  } catch (initialError) {
+    const start = cleaned.search(/[\[{]/);
+    if (start === -1) throw initialError;
+
+    const opening = cleaned[start];
+    const closing = opening === "{" ? "}" : "]";
+    let depth = 0;
+    let inString = false;
+    let escaped = false;
+
+    for (let index = start; index < cleaned.length; index += 1) {
+      const character = cleaned[index];
+      if (inString) {
+        if (escaped) escaped = false;
+        else if (character === "\\") escaped = true;
+        else if (character === '"') inString = false;
+        continue;
+      }
+
+      if (character === '"') inString = true;
+      else if (character === opening) depth += 1;
+      else if (character === closing && --depth === 0) {
+        return JSON.parse(cleaned.slice(start, index + 1)) as T;
+      }
+    }
+
+    throw initialError;
+  }
+}
+
 export async function callGemmaJSON<T>({
   systemInstruction,
   prompt,
@@ -53,7 +93,7 @@ export async function callGemmaJSON<T>({
   const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
   if (!text) throw new Error("Gemma response had no text part");
 
-  return JSON.parse(text) as T;
+  return parseGemmaJSON<T>(text);
 }
 
 // --- Feature-specific calls -------------------------------------------------
