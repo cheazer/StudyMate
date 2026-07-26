@@ -6,7 +6,7 @@
 // POST https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent
 // auth via the `x-goog-api-key` header, JSON mode via generationConfig.
 
-const GEMMA_MODEL = process.env.GEMMA_MODEL || "gemma-4-27b-it";
+const GEMMA_MODEL = process.env.GEMMA_MODEL || "gemma-4-26b-a4b-it";
 const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMMA_MODEL}:generateContent`;
 
 interface CallGemmaJSONOptions {

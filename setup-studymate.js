@@ -1,10 +1,4 @@
-// Auto-generated setup script for the StudyMate hackathon scaffold.
-// Run with: node setup-studymate.js
-//
-// Safe to run in an existing project: it will NOT touch .env.local,
-// .gitignore, or any file that already exists in this folder — except
-// package.json, which gets merged (only missing keys are added, nothing
-// you already have is overwritten or removed).
+
 
 const fs = require("fs");
 const path = require("path");
@@ -123,3 +117,4 @@ Next steps:
   4. npm run dev  ->  http://localhost:3000
   5. git add -A && git commit -m "add app scaffold" && git push
 `);
+
