@@ -6,6 +6,9 @@
 // POST https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent
 // auth via the `x-goog-api-key` header, JSON mode via generationConfig.
 
+// Models available through the Gemini API as of July 2026 include
+// gemma-4-26b-a4b-it and gemma-4-31b-it. Keep the default aligned with the
+// sample environment file so an unset configuration still works.
 const GEMMA_MODEL = process.env.GEMMA_MODEL || "gemma-4-26b-a4b-it";
 const ENDPOINT = `https://generativelanguage.googleapis.com/v1beta/models/${GEMMA_MODEL}:generateContent`;
 
@@ -20,8 +23,10 @@ export async function callGemmaJSON<T>({
   prompt,
   responseSchema,
 }: CallGemmaJSONOptions): Promise<T> {
-  const apiKey = process.env.GEMMA_API_KEY;
-  if (!apiKey) throw new Error("GEMMA_API_KEY is not set");
+  // GEMINI_API_KEY is the standard name used by Google AI Studio. Keep the
+  // older GEMMA_API_KEY name working so existing deployments do not break.
+  const apiKey = process.env.GEMINI_API_KEY ?? process.env.GEMMA_API_KEY;
+  if (!apiKey) throw new Error("GEMINI_API_KEY is not set");
 
   const res = await fetch(ENDPOINT, {
     method: "POST",

@@ -17,7 +17,16 @@ export async function POST(req: Request) {
   }
   const { topicId, topic, courseName } = parsed.data;
 
-  const result = await generateRoadmap(topic, courseName);
+  let result: Awaited<ReturnType<typeof generateRoadmap>>;
+  try {
+    result = await generateRoadmap(topic, courseName);
+  } catch (error) {
+    console.error("Roadmap generation failed", error);
+    return NextResponse.json(
+      { error: "Unable to generate a roadmap right now. Please try again." },
+      { status: 502 }
+    );
+  }
 
   const milestones = result.milestones.map((m) => ({
     id: crypto.randomUUID(),
