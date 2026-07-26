@@ -20,7 +20,13 @@ export async function POST(req: Request) {
   // TODO: replace with the authenticated user's id once Supabase auth is wired up
   const { data, error } = await supabaseServer()
     .from("profiles")
-    .insert(parsed.data)
+    .insert({
+      course_name: parsed.data.courseName,
+      weekly_goal_hours: parsed.data.weeklyGoalHours,
+      biggest_challenge: parsed.data.biggestChallenge,
+      preferred_study_time: parsed.data.preferredStudyTime,
+      preferred_format: parsed.data.preferredFormat,
+    })
     .select()
     .single();
 
