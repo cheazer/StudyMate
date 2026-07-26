@@ -80,3 +80,38 @@ export interface DashboardSummary {
   nudge: { topicTitle: string; message: string } | null;
   activeTopics: Topic[];
 }
+
+// Study content generation
+export interface GuidedNotes {
+  summary: string;
+  keyPoints: string[];
+  deeperExplanation: string;
+}
+
+export interface PracticeQuestions {
+  questions: Array<{
+    prompt: string;
+    guidance: string;
+  }>;
+}
+
+export interface VideoScript {
+  title: string;
+  duration: number; // estimated minutes
+  outline: Array<{
+    section: string;
+    duration: number;
+    content: string;
+  }>;
+}
+
+// Course summary for workspace
+export interface CourseSummary {
+  courseName: string;
+  topicCount: number;
+  currentProgress: number; // 0-100
+  topics: Topic[];
+  recentStudyPacks: StudyPack[];
+  recentAttempts: Attempt[];
+  todayStudyMinutes: number;
+}
